@@ -38,10 +38,19 @@ defmodule Hangman.Game do
   # end
 
   def make_move(game, guess) do
-    accept_move(game, guess, MapSet.member?(game.used, guess))
+    make_move(game, guess, guess =~ ~r/[a-z]/)
+    #accept_move(game, guess, MapSet.member?(game.used, guess))
   end
 
   ###################
+
+  def make_move(game, guess, _is_valid_character = true) do
+    accept_move(game, guess, MapSet.member?(game.used, guess))
+  end
+
+  def make_move(game, _guess, _invalid_character) do
+    Map.put(game, :game_state, :invalid_guess)
+  end
 
   defp accept_move(game, _guess, _alread_guessed = true) do
     Map.put(game, :game_state, :already_used)

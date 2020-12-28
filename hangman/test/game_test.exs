@@ -115,7 +115,7 @@ defmodule GameTest do
     assert game.turns_left == 0
   end
 
-  test "another test" do
+  test "test with enum reduce" do
     moves = [
       {"w", :good_guess},
       {"i", :good_guess},
@@ -144,5 +144,16 @@ defmodule GameTest do
       assert game.game_state == state
       game
     end)
+  end
+
+  test "a invalid guess is recognized" do
+    invalid_characters = ["A", "!", "0", "Ö"]
+
+    game = Game.new_game("something")
+
+    for invalid_character <- invalid_characters do
+      game = Game.make_move(game, invalid_character)
+      assert game.game_state == :invalid_guess
+    end
   end
 end
