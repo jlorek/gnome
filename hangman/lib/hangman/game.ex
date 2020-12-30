@@ -39,7 +39,7 @@ defmodule Hangman.Game do
 
   def make_move(game, guess) do
     make_move(game, guess, guess =~ ~r/[a-z]/)
-    #accept_move(game, guess, MapSet.member?(game.used, guess))
+    # accept_move(game, guess, MapSet.member?(game.used, guess))
   end
 
   ###################
