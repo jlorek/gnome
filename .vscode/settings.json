@@ -1,3 +1,4 @@
 {
-    "elixirLS.projectDir": "hangman"
+    // "elixirLS.projectDir": "hangman"
+    "elixirLS.projectDir": "text_client"
 }

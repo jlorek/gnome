@@ -17,7 +17,19 @@
             "group": {
                 "kind": "test",
                 "isDefault": true
+            }
+        },
+        {
+            "label": "format",
+            "type": "process",
+            "command": "mix",
+            "args": [
+                "format"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}/hangman"
             },
+            "problemMatcher": []
         }
     ]
 }
