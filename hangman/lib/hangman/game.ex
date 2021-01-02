@@ -13,7 +13,8 @@ defmodule Hangman.Game do
   end
 
   def new_game() do
-    Dictionary.random_word()
+    Dictionary.start()
+    |> Dictionary.random_word()
     |> new_game()
   end
 
@@ -49,7 +50,7 @@ defmodule Hangman.Game do
     accept_move(game, guess, MapSet.member?(game.used, guess))
   end
 
-  def make_move(game, _guess, _invalid_character) do
+  def make_move(game, _guess, _invalid_character = false) do
     Map.put(game, :game_state, :invalid_guess)
   end
 
@@ -57,7 +58,7 @@ defmodule Hangman.Game do
     Map.put(game, :game_state, :already_used)
   end
 
-  defp accept_move(game, guess, _alread_guessed) do
+  defp accept_move(game, guess, _alread_guessed = false) do
     Map.put(game, :used, MapSet.put(game.used, guess))
     |> score_guess(Enum.member?(game.letters, guess))
   end
@@ -69,8 +70,6 @@ defmodule Hangman.Game do
       |> maybe_won()
 
     Map.put(game, :game_state, new_state)
-    # won?
-    # won? -> :won, :good_guess
   end
 
   defp score_guess(game = %{turns_left: 1}, _not_good_guess) do

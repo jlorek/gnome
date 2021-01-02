@@ -1,11 +1,12 @@
 ```
-cd text_client
-mix run -e TextClient.start
-mix run -e TextClient.start_ai
+:observer.start()
 ```
 
+```
 #iex:break
+```
 
+```
 iex(6)> [{:path, "path"}]
 [path: "path"]
 iex(7)> {:path, "path"}
@@ -38,3 +39,4 @@ iex(20)> list
 [path: "path", foo: "bar"]
 iex(21)> list == [{:path, "path"}, {:foo, "bar"}]
 true
+```

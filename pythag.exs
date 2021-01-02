@@ -1,13 +1,24 @@
-for a <- 1..100, b <- 1..100, c <- 1..100, c > a, c > b, a*a + b*b == c*c, do: {a, b, c}
-|> IO.inspect(label: "triple")
+for a <- 1..100,
+    b <- 1..100,
+    c <- 1..100,
+    c > a,
+    c > b,
+    a * a + b * b == c * c,
+    do:
+      {a, b, c}
+      |> IO.inspect(label: "triple")
 
-triples = for a <- 1..100, b <- 1..100, c <- 1..100, c > a, c > b, a*a + b*b == c*c, do: {a, b, c}
-IO.puts "Num triples = #{length(triples)}"
+triples =
+  for a <- 1..100, b <- 1..100, c <- 1..100, c > a, c > b, a * a + b * b == c * c, do: {a, b, c}
 
-{ ms, _result } = :timer.tc(fn ->
-  for a <- 1..100, b <- 1..100, c <- 1..100, c > a, c > b, a*a + b*b == c*c, do: {a, b, c}
-end)
-IO.puts "#{ms}ms"
+IO.puts("Num triples = #{length(triples)}")
+
+{ms, _result} =
+  :timer.tc(fn ->
+    for a <- 1..100, b <- 1..100, c <- 1..100, c > a, c > b, a * a + b * b == c * c, do: {a, b, c}
+  end)
+
+IO.puts("#{ms}ms")
 
 # why?
 # iex(77)> for a <- 1..3, b <- 1..3, into: %{}, do: {a,b}

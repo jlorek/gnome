@@ -24,10 +24,11 @@
             "type": "process",
             "command": "mix",
             "args": [
-                "format"
+                "format",
+                "**/*.{ex,exs}"
             ],
             "options": {
-                "cwd": "${workspaceRoot}/hangman"
+                "cwd": "${workspaceRoot}"
             },
             "problemMatcher": []
         }
