@@ -13,6 +13,9 @@ defmodule Dictionary.WordList do
   end
 
   def random_word() do
+    # if :rand.uniform < 0.33 do
+    #   Agent.get(@me, fn _ -> exit(:bye) end)
+    # end
     Agent.get(@me, &Enum.random/1)
   end
 end
