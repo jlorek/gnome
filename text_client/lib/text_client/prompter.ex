@@ -12,12 +12,12 @@ defmodule TextClient.Prompter do
     |> check_input(game)
   end
 
-  defp check_input({:error, reason}, _) do
+  defp check_input({:error, _reason}, _) do
     IO.puts("You broke the game 🥴")
     exit(:normal)
   end
 
-  defp check_input({:eof}, _) do
+  defp check_input(:eof, _) do
     IO.puts("Looks like you gave up...")
     exit(:normal)
   end
