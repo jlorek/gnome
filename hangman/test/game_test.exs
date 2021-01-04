@@ -77,7 +77,7 @@ defmodule GameTest do
     assert game.turns_left == 7
     {game, _} = Game.make_move(game, "l")
     assert game.game_state == :good_guess
-    assert game.turns_left == 7 
+    assert game.turns_left == 7
     {game, _} = Game.make_move(game, "e")
     assert game.game_state == :won
     assert game.turns_left == 7

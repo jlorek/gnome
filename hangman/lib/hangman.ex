@@ -1,13 +1,13 @@
 defmodule Hangman do
-  alias Hangman.Game
+  def new_game() do
+    Hangman.Server.start_link()
+  end
 
-  defdelegate new_game(), to: Game
-  defdelegate init_game(), to: Game, as: :new_game
-  defdelegate tally(game), to: Game
-  defdelegate make_move(game, guess), to: Game
+  def make_move(game_pid, guess) do
+    GenServer.call(game_pid, {:make_move, guess})
+  end
 
-  # def make_move(game, guess) do
-  #   game = Game.make_move(game, guess)
-  #   {game, tally(game)}
-  # end
+  def tally(game_pid) do
+    GenServer.call(game_pid, {:tally})
+  end
 end
