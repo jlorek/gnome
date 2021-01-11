@@ -15,6 +15,7 @@ defmodule Hangman.Game do
   def new_game() do
     Dictionary.random_word()
     |> new_game()
+    |> IO.inspect(label: "New Game")
   end
 
   def tally(game) do

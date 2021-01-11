@@ -8,6 +8,23 @@ eg. spawn_link(Chain, :message_loop, [])
 ```
 
 ```
+# Options List Syntax
+iex(3)> x = fn x,y -> x == y end
+#Function<43.97283095/2 in :erl_eval.expr/5>
+iex(4)> x.(1,1)
+true
+iex(5)> x.(1,2)
+false
+iex(7)> x.([{:a, "a"}], a: "a")
+true
+iex(9)> x.([{:a, "a"}], a: "a", b: "b")
+false
+iex(10)> x.([{:a, "a"}, {:b, "b"}], a: "a", b: "b")
+true
+iex(11)>
+```
+
+```
 # dump own message queue
 iex> flush
 ```
