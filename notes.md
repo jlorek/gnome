@@ -3,6 +3,31 @@
 ```
 
 ```
+MFA = Module Function Argument
+eg. spawn_link(Chain, :message_loop, [])
+```
+
+```
+# dump own message queue
+iex> flush
+```
+
+```
+Maps also support a specific update syntax to update the value stored
+under existing atom keys:
+
+    iex> map = %{one: 1, two: 2}
+    iex> %{map | one: "one"}
+    %{one: "one", two: 2}
+
+When a key that does not exist in the map is updated a KeyError
+exception will be raised:
+
+    %{map | three: 3}
+```
+
+
+```
 #iex:break
 ```
 
