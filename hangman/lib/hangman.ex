@@ -1,6 +1,8 @@
 defmodule Hangman do
   def new_game() do
     {:ok, pid} = Supervisor.start_child(Hangman.Supervisor, [])
+    count = Hangman.Stats.inc_count()
+    IO.puts("There are #{count} games running.")
     pid
   end
 

@@ -1,21 +1,7 @@
 # Hangman
 
-**TODO: Add description**
+## How all this stuff works together
 
-## Installation
+`mix.exs` kicks of `Hangman.Application`, which starts a Supervisor named `Hangman.Supervisor`. Each child/worker in this supervisor is a `Hangman.Server`. Each server instance holds the state of one game instance. The 
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `hangman` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:hangman, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/hangman](https://hexdocs.pm/hangman).
-
+`Hangman` (the API) tells the `Hangman.Supervisor` to start a new child and returns the `pid` required for further API calls to `make_move` and  `tally`, which forward the calls to the corresponding methods in `Hangman.Game`.

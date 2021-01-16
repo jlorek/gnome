@@ -1,8 +1,8 @@
 defmodule Chain do
   defstruct(
     next_node: nil,
-    count: 4,
-    #count: 10000
+    count: 4
+    # count: 10000
   )
 
   def start_link(next_node) do
@@ -18,6 +18,7 @@ defmodule Chain do
     receive do
       {:trigger} ->
         send({:chainer, state.next_node}, {:trigger})
+
       {:trigger, list} ->
         IO.inspect(list)
         :timer.sleep(500)

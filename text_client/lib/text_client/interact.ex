@@ -1,17 +1,20 @@
 defmodule TextClient.Interact do
+  @hangman_server :hangman@fluke
+
   # alias TextClient.Player
   # alias TextClient.State
+  # aliases can be combined
   alias TextClient.{Player, State}
 
   def start() do
-    Hangman.new_game()
+    new_game()
     |> setup_state(:human)
     # |> IO.inspect(label: "Initial State")
     |> Player.play()
   end
 
   def start_ai() do
-    Hangman.new_game()
+    new_game()
     |> setup_state(:ai)
     |> Player.play()
   end
@@ -24,7 +27,20 @@ defmodule TextClient.Interact do
     }
   end
 
-  def play(state) do
-    play(state)
+  defp new_game() do
+    Node.connect(@hangman_server)
+
+    :rpc.call(
+      @hangman_server,
+      # eplxicit
+      # :"Elixir.Hangman"
+      Hangman,
+      :new_game,
+      []
+    )
   end
+
+  # def play(state) do
+  #   play(state)
+  # end
 end

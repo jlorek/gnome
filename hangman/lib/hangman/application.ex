@@ -13,6 +13,7 @@ defmodule Hangman.Application do
       strategy: :simple_one_for_one
     ]
 
+    Hangman.Stats.start()
     Supervisor.start_link(children, options)
   end
 end

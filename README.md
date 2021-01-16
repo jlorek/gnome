@@ -1,5 +1,11 @@
 ```
+# start server (correct sname is important)
+cd hangman
+mix --sname hangman -S mix
+
+# start clients
 cd text_client
-mix run -e TextClient.start
-mix run -e TextClient.start_ai
+mix --sname client1 -S mix
+TextClient.start
+TextClient.start_ai
 ```
