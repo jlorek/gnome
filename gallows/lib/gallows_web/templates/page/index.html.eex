@@ -1,0 +1,25 @@
+<section class="phx-hero">
+  <% count = 3 %>
+  Please pass me <%= plural_of("egg", count) %>, <%= plural_of("milk", 1) %> and <%= plural_of("butter", -2) %>.
+  Also i just wanted to say <%= @say %>.
+  <table>
+  <tr><th>quantity</th><th>item</th></tr>
+  <%
+  shopping = [
+    { "1 dozen", "eggs" },
+    { "1 ripe", "melon" },
+    { "4", "apples" },
+    { "2 boxes", "tea" },
+  ]
+  %>
+  <%= for {quantity, item} <- shopping do %>
+  <tr>
+    <td><%= quantity %></td>
+    <td><%= item %></td>
+  </tr>
+  <% end %>
+  </table>
+  <%# <%= raise "error" %>
+
+  <img src="<%= Routes.static_path(@conn, "/images/morty.gif") %>" />
+</section>
