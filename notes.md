@@ -3,6 +3,10 @@
 ```
 
 ```
+# flush all messages
+```
+
+```
 MFA = Module Function Argument
 eg. spawn_link(Chain, :message_loop, [])
 ```
