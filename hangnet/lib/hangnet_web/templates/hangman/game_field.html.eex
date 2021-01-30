@@ -1,0 +1,10 @@
+<h1>Gamefield</h1>
+
+<%= game_state(@tally.game_state) %>
+<div style="width: 40%; float:left ;">
+    <%= render "_gallows.html", left: @tally.turns_left  %>
+</div>
+<div style="width: 40%; float: right;">
+    <%= render "_status.html", tally: @tally, conn: @conn %>
+</div>
+<code><%= inspect @tally %></code>

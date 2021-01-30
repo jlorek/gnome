@@ -3,7 +3,36 @@
 ```
 
 ```
-# flush all messages
+# update nested structure
+iex(9)> data = %{foo: %{bar: "baz"}}
+%{foo: %{bar: "baz"}}
+iex(10)> data.foo
+%{bar: "baz"}
+iex(11)> data.foo.bar
+"baz"
+iex(12)> data.foo.bar = "knarz"
+** (CompileError) iex:12: cannot invoke remote function data.foo/0 inside a match
+iex(12)> data = put_in(data.foo.bar, "knarz")
+%{foo: %{bar: "knarz"}}
+```
+
+```
+iex(5)> i"foo"
+Term
+  "foo"
+Data type
+  BitString
+Byte size
+  3
+Description
+  This is a string: a UTF-8 encoded binary. It's printed surrounded by
+  "double quotes" because all UTF-8 encoded code points in it are printable.
+Raw representation
+  <<102, 111, 111>>
+Reference modules
+  String, :binary
+Implemented protocols
+  Collectable, IEx.Info, Inspect, List.Chars, String.Chars
 ```
 
 ```
@@ -46,7 +75,6 @@ exception will be raised:
 
     %{map | three: 3}
 ```
-
 
 ```
 #iex:break

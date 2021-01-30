@@ -21,12 +21,12 @@ defmodule Hangman.Stats do
   end
 
   def handle_info({:nodeup, node}, state) do
-    IO.puts("Node connected: #{inspect node}")
+    IO.puts("Node connected: #{inspect(node)}")
     {:noreply, state}
   end
 
   def handle_info({:nodedown, node}, state) do
-    IO.puts("Node disconnected: #{inspect node}")
+    IO.puts("Node disconnected: #{inspect(node)}")
     {:noreply, state}
   end
 

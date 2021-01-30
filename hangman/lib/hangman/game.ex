@@ -41,7 +41,7 @@ defmodule Hangman.Game do
 
   def make_move(game, guess) do
     # accept_move(game, guess, MapSet.member?(game.used, guess))
-    make_move(game, guess, guess =~ ~r/[a-z]/)
+    make_move(game, guess, guess =~ ~r/^[a-zA-Z]$/)
     |> return_with_tally()
   end
 
