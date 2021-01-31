@@ -29,6 +29,6 @@ export default class HangwebSocket {
     }
 
     fetch_tally() {
-        this.channel.push("tally2", {})
+        this.channel.push("tally", {})
     }
 }
