@@ -22,7 +22,7 @@ defmodule Hangman.Game do
     %{
       game_state: game.game_state,
       turns_left: game.turns_left,
-      letters: game.letters |> reveal_guessed(game.used),
+      letters: game.letters |> reveal_guessed(game.used, game.game_state),
       used: game.used
     }
   end
@@ -45,7 +45,10 @@ defmodule Hangman.Game do
     |> return_with_tally()
   end
 
-  ###################
+  def game_finished?(_game = %{game_state: state}) when state in [:won, :lost], do: true
+  def game_finished?(_game), do: false
+
+  ################### private stuff below
 
   defp return_with_tally(game) do
     {game, tally(game)}
@@ -89,7 +92,9 @@ defmodule Hangman.Game do
   defp maybe_won(true), do: :won
   defp maybe_won(false), do: :good_guess
 
-  defp reveal_guessed(letters, used) do
+  defp reveal_guessed(letters, _used, :lost), do: letters
+
+  defp reveal_guessed(letters, used, _state) do
     letters
     |> Enum.map(fn letter -> reveal_letter(letter, MapSet.member?(used, letter)) end)
   end

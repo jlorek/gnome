@@ -21,4 +21,5 @@
         {{ ch }}
         </button>
     </div>
+    <p>Session timer is {{timer.total_seconds}} seconds...</p>
 </template>

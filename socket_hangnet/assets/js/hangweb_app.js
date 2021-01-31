@@ -1,5 +1,3 @@
-// alert("foo")
-
 const RESPONSES = {
     won: ["info", "You won! 🎉"],
     lost: ["danger", "You lost... 😯"],
@@ -14,11 +12,22 @@ let Vue = require("vue/dist/vue.min.js")
 // import HangwebSocket from "./hangweb_socket.js"
 import HangwebServer from "./hangweb_server"
 
-let view = function(hangman) {
+let view = function(hangman, timer) {
     let app = new Vue({
         el: "#app",
         data: {
-            tally: hangman.tally
+            tally: hangman.tally,
+            timer: hangman.timer
+        },
+        created() {
+            const component = this;
+            this.handler = function (e) {
+                component.guess(e.key)
+            }
+            window.addEventListener('keyup', this.handler)
+        },
+        beforeDestroy() {
+            window.removeEventListener('keyup', this.handler)
         },
         computed: {
             game_over: function() {
@@ -57,16 +66,16 @@ let view = function(hangman) {
 }
 
 window.onload = function() {
-    // let hangman = new HangwebSocket()
-    // hangman.connect_to_hangman()
     let tally = {
         turns_left: 7,
-        letters: ["a", "_", "c"],
+        letters: ["l", "o", "a", "d", "i", "n", "g"],
         game_state: "initializing",
         used: [ ]
     }
-    let hangman = new HangwebServer(tally)
+    let timer = {
+        total_seconds: 0
+    }
+    let hangman = new HangwebServer(tally, timer)
     let app = view(hangman)
-
     hangman.connect_to_hangman()
 }

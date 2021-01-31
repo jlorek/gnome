@@ -16,4 +16,8 @@ defmodule Hangman do
   def tally(game_pid) do
     GenServer.call(game_pid, {:tally})
   end
+
+  def game_finished?(game_pid) do
+    GenServer.call(game_pid, {:game_finished})
+  end
 end

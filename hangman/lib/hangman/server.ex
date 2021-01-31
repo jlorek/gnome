@@ -20,4 +20,9 @@ defmodule Hangman.Server do
     tally = Game.tally(game_state)
     {:reply, tally, game_state}
   end
+
+  def handle_call({:game_finished}, _from, game_state) do
+    game_finished = Game.game_finished?(game_state)
+    {:reply, game_finished, game_state}
+  end
 end

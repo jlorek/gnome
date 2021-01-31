@@ -1,8 +1,9 @@
 import { Socket } from "phoenix"
 
 export default class HangwebServer {
-    constructor(tally) {
+    constructor(tally, timer) {
         this.tally = tally
+        this.timer = timer
         this.socket = new Socket("/socket", {connect: "please"})
         this.socket.connect()
         console.log("Socket connected!")
@@ -13,11 +14,11 @@ export default class HangwebServer {
         this.channel
             .join()
             .receive("ok", resp => {
-                console.log("Channel joined: " + resp)
+                console.log("Channel joined: ", resp)
                 this.fetch_tally()
             })
             .receive("error", resp => {
-                alert(resp)
+                alert("No Socket - no fun! Error: " + resp)
                 throw(resp)
             })
     }
@@ -25,10 +26,13 @@ export default class HangwebServer {
     setup_channel() {
         this.channel = this.socket.channel("hangman:game", {foo: "bar"})
         this.channel.on("tally", tally => {
-            console.log("Received tally!");
-            console.dir(tally)
+            console.log("Received tally: ", tally)
             this.copy_tally(tally)
-        });
+        })
+        this.channel.on("timer", timer => {
+            console.log("Received timer: ", timer)
+            this.copy_timer(timer)
+        })
     }
 
     fetch_tally() {
@@ -46,6 +50,12 @@ export default class HangwebServer {
     copy_tally(from) {
         for (let k in from) {
             this.tally[k] = from[k]
+        }
+    }
+    
+    copy_timer(from) {
+        for (let k in from) {
+            this.timer[k] = from[k]
         }
     }
 }
